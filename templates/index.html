@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Url Shortner</title>
+    <script>
+      src = "copy.js";
+    </script>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='cropped-favicon.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/5f3f547070.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Website Title -->
+    <div class="container">
+      <h2 class="container-heading">
+        <span class="heading_font">Url Shortner</span>
+      </h2>
+      <div class="description">
+        <p>A Simple Web Application,that shortens Long Urls.</p>
+      </div>
+    </div>
+    <a href="/" class="home_button">Home</a>
+    <a href="/history" class="history_button">History</a>
+
+    <!-- Text Area -->
+    <div class="ml-container">
+      <form action="{{ url_for('shorten') }}" method="POST">
+        <input
+          class="form-input"
+          type="long_url"
+          name="long_url"
+          placeholder="Paste the Url you want to shorten"
+        /><br />
+
+        <input type="submit" class="my-cta-button" value="Shorten" />
+      </form>
+    </div>
+
+    <div class="results">
+      <h2>Short Url:</h2>
+      <!-- <input type="text" id="p3" value="{{ short_url }}" /> -->
+      <p><div id=p3>{{ short_url }}</div></p>
+      <button class="copyButton btn" onclick="copyToClipboard('p3')">
+        Copy
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="contact">
+        <a target="_blank" href="https://github.com/vinaynamani"
+          ><i class="fab fa-github fa-lg contact-icon"></i
+        ></a>
+        <a target="_blank" href="https://www.linkedin.com/in/vinaynamani/"
+          ><i class="fab fa-linkedin fa-lg contact-icon"></i
+        ></a>
+      </div>
+      <p class="footer-description">Made with ❤️ by Vinay Namani.</p>
+    </div>
+
+    <script>
+      function copyToClipboard(var1) {
+        let val = document.getElementById(var1).innerHTML;
+        const selBox = document.createElement("textarea");
+        selBox.style.position = "fixed";
+        selBox.style.left = "0";
+        selBox.style.top = "0";
+        selBox.style.opacity = "0";
+        selBox.value = val;
+        document.body.appendChild(selBox);
+        selBox.focus();
+        selBox.select();
+        document.execCommand("copy");
+        document.body.removeChild(selBox);
+        alert("text copied to clipboard, please use Ctrl-V to paste the data");
+      }
+    </script>
+  </body>
+</html>
